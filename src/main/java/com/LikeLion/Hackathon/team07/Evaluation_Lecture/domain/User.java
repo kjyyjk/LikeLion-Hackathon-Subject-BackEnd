@@ -3,7 +3,6 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 
@@ -16,18 +15,18 @@ public class User {
     private Long index;
 
     @Column(nullable = false)
-    private String userId;
+    private String userID;
 
     @Column(nullable = false)
-    private String userPw;
+    private String userPassword;
 
     @Column(nullable = false)
     private String userEmail;
 
     @Builder
-    public User(String userId, String userPw, String userEmail){
-        this.userId = userId;
-        this.userPw = userPw;
+    public User(String userID, String userPassword, String userEmail){
+        this.userID = userID;
+        this.userPassword = userPassword;
         this.userEmail = userEmail;
     }
 }
