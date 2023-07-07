@@ -14,19 +14,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long index;
 
-    @Column(nullable = false)
-    private String userID;
+    @Column
+    private String user_id;
 
-    @Column(nullable = false)
-    private String userPassword;
+    @Column
+    private String user_password;
 
-    @Column(nullable = false)
-    private String userEmail;
+    @Column
+    private String user_email;
 
     @Builder
     public User(String userID, String userPassword, String userEmail){
-        this.userID = userID;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
+        this.user_id = user_id;
+        this.user_password = user_password;
+        this.user_email = user_email;
     }
 }
