@@ -29,6 +29,11 @@ public class UserController {
         if(bindingResult.hasErrors()){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400,bindingResult));
         }
+
+        if(userService.checkDuplication(requestDto)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "회원가입 실패. 중복회원입니다."));
+        }
+
         userService.join(requestDto);
         return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "회원가입 완료"));
     }
