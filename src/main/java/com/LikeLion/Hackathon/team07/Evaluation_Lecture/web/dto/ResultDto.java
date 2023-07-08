@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 public class ResultDto {
     private int code;
     private Object result;
-    public static ResultDto createSuccessResult(int code, String message){
-        return new ResultDto(code, MessageField.ofSucc(message));
+    public static ResultDto createResult(int code, String message){
+        return new ResultDto(code, MessageField.of(message));
     }
-    public static ResultDto createFailResult(int code, BindingResult bindingResult){
-        return new ResultDto(code, MessageField.ofFail(bindingResult));
+    public static ResultDto createResult(int code, BindingResult bindingResult){
+        return new ResultDto(code, MessageField.of(bindingResult));
     }
 
     @Getter
@@ -29,13 +29,13 @@ public class ResultDto {
     @AllArgsConstructor
     public static class MessageField{
         private String message;
-        public static MessageField ofSucc(String message){
+        public static MessageField of(String message){
             MessageField messageField = new MessageField();
             messageField.setMessage(message);
             return messageField;
         }
 
-        public static List<MessageField> ofFail(BindingResult bindingResult) {
+        public static List<MessageField> of(BindingResult bindingResult) {
             List<MessageField> messageFields = bindingResult.getAllErrors().stream().map(error ->
                     new MessageField(((FieldError) error).getDefaultMessage())).collect(Collectors.toList());
             return messageFields;

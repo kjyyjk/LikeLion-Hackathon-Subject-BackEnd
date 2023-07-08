@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.xml.transform.Result;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,12 +25,12 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity userJoinPro(@Valid @RequestBody UserJoinRequestDto requestDto, BindingResult bindingResult){
+    public ResponseEntity<ResultDto> userJoinPro(@Valid @RequestBody UserJoinRequestDto requestDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createFailResult(400,bindingResult));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400,bindingResult));
         }
         userService.join(requestDto);
-        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createSuccessResult(200, "회원가입 완료"));
+        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "회원가입 완료"));
     }
 
 //    @ExceptionHandler(MethodArgumentNotValidException.class)
