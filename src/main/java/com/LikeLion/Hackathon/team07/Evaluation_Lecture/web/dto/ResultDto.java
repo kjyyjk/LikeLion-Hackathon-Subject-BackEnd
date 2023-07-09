@@ -16,24 +16,23 @@ import java.util.stream.Collectors;
 public class ResultDto {
     private int code;
     private Object result;
-    public static ResultDto createResult(int code, String message){
+
+    public static ResultDto createResult(int code, String message) {
         return new ResultDto(code, MessageField.of(message));
     }
-    public static ResultDto createResult(int code, BindingResult bindingResult){
+
+    public static ResultDto createResult(int code, BindingResult bindingResult) {
         return new ResultDto(code, MessageField.of(bindingResult));
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 71aa31937b82170a11a0d24837df5e9721c0d327
     @Getter
     @Setter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MessageField{
+    public static class MessageField {
         private String message;
-        public static MessageField of(String message){
+
+        public static MessageField of(String message) {
             MessageField messageField = new MessageField();
             messageField.setMessage(message);
             return messageField;
@@ -45,8 +44,4 @@ public class ResultDto {
             return messageFields;
         }
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 71aa31937b82170a11a0d24837df5e9721c0d327
 }
