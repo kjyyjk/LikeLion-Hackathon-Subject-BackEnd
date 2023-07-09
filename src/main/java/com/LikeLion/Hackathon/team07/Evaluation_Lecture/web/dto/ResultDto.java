@@ -23,7 +23,10 @@ public class ResultDto {
         return new ResultDto(code, MessageField.of(bindingResult));
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 71aa31937b82170a11a0d24837df5e9721c0d327
     @Getter
     @Setter
     @NoArgsConstructor
@@ -42,4 +45,8 @@ public class ResultDto {
             return messageFields;
         }
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 71aa31937b82170a11a0d24837df5e9721c0d327
 }
