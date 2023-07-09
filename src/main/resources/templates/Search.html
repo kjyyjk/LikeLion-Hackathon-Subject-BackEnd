@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search</title>
+</head>
+<body>
+    <form method="GET" action="/evaluation/search/0">
+        <select name="lectureDivide">
+            <option value="전체">전체</option>
+            <option value="전공">전공</option>
+            <option value="교양">교양</option>
+            <option value="기타">기타</option>
+        </select>
+        <select name="searchType">
+            <option value="최신순">최신순</option>
+            <option value="추천순">추천순</option>
+        </select>
+        <input
+                name="search"
+                type="text"
+                placeholder="내용을 입력하세요."
+        />
+        <button type="submit">검색</button>
+    </form>
+</body>
+</html>
