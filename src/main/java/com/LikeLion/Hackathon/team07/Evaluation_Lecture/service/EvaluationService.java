@@ -20,7 +20,7 @@ public class EvaluationService {
     @Transactional
     public List<EvaluationDto> getSearchList(String keyword){
         System.out.println("getSearchList 실행");
-        List<Evaluation> evaluationList = evaluationRepository.findByTitleContaining(keyword);
+        List<Evaluation> evaluationList = evaluationRepository.findByEvaluationContentContains(keyword);
         List<EvaluationDto> evaluationDtoList = new ArrayList<>();
 
         if(evaluationList.isEmpty()) return evaluationDtoList;
@@ -35,13 +35,13 @@ public class EvaluationService {
     private EvaluationDto convertEntityToDto(Evaluation ch) {
         return EvaluationDto.builder()
                 .userID(ch.getUserID())
-                .lecture_name(ch.getLecture_name())
-                .professor_name(ch.getProfessor_name())
-                .lecture_year(ch.getLecture_year())
-                .semester_divide(ch.getSemester_divide())
-                .lecture_divide(ch.getLecture_divide())
-                .evaluation_title(ch.getTitle())
-                .evaluation_content(ch.getEvaluation_content())
+                .lectureName(ch.getLectureName())
+                .professorName(ch.getProfessorName())
+                .lectureYear(ch.getLectureYear())
+                .semesterDivide(ch.getSemesterDivide())
+                .lectureDivide(ch.getLectureDivide())
+                .evaluationTitle(ch.getTitle())
+                .evaluationContent(ch.getEvaluationContent())
                 .build();
     }
 }
