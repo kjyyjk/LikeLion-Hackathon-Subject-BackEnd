@@ -16,18 +16,18 @@ public class User {
     private int index;
 
     @Column
-    private String user_id;
+    private String userID;
 
     @Column
-    private String user_password;
+    private String userPassword;
 
     @Column
-    private String user_email;
+    private String userEmail;
 
     @Builder
     public User(String userID, String userPassword, String userEmail){
-        this.user_id = user_id;
-        this.user_password = user_password;
-        this.user_email = user_email;
+        this.userID = userID;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
     }
 }
