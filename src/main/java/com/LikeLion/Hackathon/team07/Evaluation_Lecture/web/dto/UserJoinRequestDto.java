@@ -13,6 +13,11 @@ import javax.validation.constraints.NotBlank;
 @Getter //@Getter이 있어야 db에 null값이 아닌 값이 들어간다
 
 public class UserJoinRequestDto {
+
+    private String user_id;
+    private String user_password;
+    private String user_email;
+
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String userID;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
@@ -23,16 +28,16 @@ public class UserJoinRequestDto {
 
     @Builder
     public UserJoinRequestDto(String userID, String userPassword, String userEmail) {
-        this.userID = userID;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
+        this.user_id = user_id;
+        this.user_password = user_password;
+        this.user_email = user_email;
     }
 
     public User toEntity(){
         return User.builder()
-                .userID(userID)
-                .userPassword(userPassword)
-                .userEmail(userEmail)
+                .userID(user_id)
+                .userPassword(user_password)
+                .userEmail(user_email)
                 .build();
     }
 }
