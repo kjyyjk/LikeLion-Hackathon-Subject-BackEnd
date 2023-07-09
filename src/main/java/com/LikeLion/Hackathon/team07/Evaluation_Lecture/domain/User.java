@@ -2,17 +2,18 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long index;
+    private int index;
 
     @Column(nullable = false)
     private String userID;
