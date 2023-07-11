@@ -4,11 +4,16 @@ import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Evaluation;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.EvaluationRepository;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.EvaluationDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 
 @RequiredArgsConstructor
 @Service
@@ -19,7 +24,6 @@ public class EvaluationService {
 
     @Transactional
     public List<EvaluationDto> getSearchList(String keyword){
-        System.out.println("getSearchList 실행");
         List<Evaluation> evaluationList = evaluationRepository.findByEvaluationContentContains(keyword);
         List<EvaluationDto> evaluationDtoList = new ArrayList<>();
 
@@ -31,6 +35,7 @@ public class EvaluationService {
 
         return evaluationDtoList;
     }
+
 
     private EvaluationDto convertEntityToDto(Evaluation ch) {
         return EvaluationDto.builder()

@@ -3,6 +3,9 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Evaluation;
 import lombok.*;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @ToString
@@ -17,9 +20,12 @@ public class EvaluationDto {
     private String lectureDivide;
     private String evaluationTitle;
     private String evaluationContent;
+    private int likeCount;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     @Builder
-    public EvaluationDto(String title,String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent) {
+    public EvaluationDto(String title,String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt) {
         this.title = title;
         this.userID = userID;
         this.lectureName = lectureName;
@@ -29,6 +35,9 @@ public class EvaluationDto {
         this.lectureDivide = lectureDivide;
         this.evaluationTitle = evaluationTitle;
         this.evaluationContent = evaluationContent;
+        this.likeCount = likeCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Evaluation toEntity(){
@@ -42,6 +51,9 @@ public class EvaluationDto {
                 .lectureDivide(lectureDivide)
                 .evaluationTitle(evaluationTitle)
                 .evaluationContent(evaluationContent)
+                .likeCount(likeCount)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
                 .build();
     }
 }
