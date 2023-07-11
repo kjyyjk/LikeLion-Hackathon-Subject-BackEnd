@@ -3,6 +3,9 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Evaluation;
 import lombok.*;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @ToString
@@ -10,38 +13,47 @@ import lombok.*;
 public class EvaluationDto {
     private String title;
     private String userID;
-    private String lecture_name;
-    private String professor_name;
-    private int lecture_year;
-    private String semester_divide;
-    private String lecture_divide;
-    private String evaluation_title;
-    private String evaluation_content;
+    private String lectureName;
+    private String professorName;
+    private int lectureYear;
+    private String semesterDivide;
+    private String lectureDivide;
+    private String evaluationTitle;
+    private String evaluationContent;
+    private int likeCount;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     @Builder
-    public EvaluationDto(String title,String userID, String lecture_name, String professor_name, int lecture_year, String semester_divide, String lecture_divide, String evaluation_title, String evaluation_content) {
+    public EvaluationDto(String title,String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt) {
         this.title = title;
         this.userID = userID;
-        this.lecture_name = lecture_name;
-        this.professor_name = professor_name;
-        this.lecture_year = lecture_year;
-        this.semester_divide = semester_divide;
-        this.lecture_divide = lecture_divide;
-        this.evaluation_title = evaluation_title;
-        this.evaluation_content = evaluation_content;
+        this.lectureName = lectureName;
+        this.professorName = professorName;
+        this.lectureYear = lectureYear;
+        this.semesterDivide = semesterDivide;
+        this.lectureDivide = lectureDivide;
+        this.evaluationTitle = evaluationTitle;
+        this.evaluationContent = evaluationContent;
+        this.likeCount = likeCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Evaluation toEntity(){
         return Evaluation.builder()
                 .title(title)
                 .userID(userID)
-                .lecture_name(lecture_name)
-                .professor_name(professor_name)
-                .lecture_year(lecture_year)
-                .semester_divide(semester_divide)
-                .lecture_divide(lecture_divide)
-//                .evaluation_title(evaluation_title)
-                .evaluation_content(evaluation_content)
+                .lectureName(lectureName)
+                .professorName(professorName)
+                .lectureYear(lectureYear)
+                .semesterDivide(semesterDivide)
+                .lectureDivide(lectureDivide)
+                .evaluationTitle(evaluationTitle)
+                .evaluationContent(evaluationContent)
+                .likeCount(likeCount)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
                 .build();
     }
 }
