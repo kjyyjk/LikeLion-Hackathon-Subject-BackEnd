@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Getter
 
-public class UserJoinRequestDto {
+public class UserRequestDto {
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String userID;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
@@ -21,7 +21,7 @@ public class UserJoinRequestDto {
     private String userEmail;
 
     @Builder
-    public UserJoinRequestDto(String userID, String userPassword, String userEmail) {
+    public UserRequestDto(String userID, String userPassword, String userEmail) {
         this.userID = userID;
         this.userPassword = userPassword;
         this.userEmail = userEmail;

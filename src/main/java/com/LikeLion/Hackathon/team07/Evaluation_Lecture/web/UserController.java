@@ -2,7 +2,7 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.UserService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.ResultDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<ResultDto> userJoinPro(@Valid @RequestBody UserJoinRequestDto requestDto, BindingResult bindingResult) {
+    public ResponseEntity<ResultDto> userJoinPro(@Valid @RequestBody UserRequestDto requestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
@@ -38,5 +38,13 @@ public class UserController {
     @GetMapping("/login")
     public String userLoginForm() {
         return "/userLoginForm";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ResultDto> userLoginPro(@Valid @RequestBody UserRequestDto requestDto){
+        if(!userService.login(requestDto)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "로그인 실패"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그인 성공"));
     }
 }
