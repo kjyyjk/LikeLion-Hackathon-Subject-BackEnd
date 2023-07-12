@@ -33,7 +33,9 @@ public class User {
     public void userLogin(){
         this.loginStatus = true;
     }
-
+    public void userLogout() {
+        this.loginStatus = false;
+    }
     @Builder
     public User(String userID, String userPassword, String userEmail) {
         this.userID = userID;

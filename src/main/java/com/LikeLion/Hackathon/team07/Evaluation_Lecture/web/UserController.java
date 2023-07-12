@@ -47,4 +47,12 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그인 성공"));
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<ResultDto> userLogoutPro(@Valid @RequestBody UserRequestDto requestDto){
+        if(!userService.logout(requestDto)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "로그아웃 실패"));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그아웃 성공"));
+    }
 }
