@@ -5,7 +5,7 @@ import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.EvaluationReposit
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Likey;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.LikeyRepository;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.LikeyDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +19,7 @@ public class LikeyService {
     private final EvaluationRepository evaluationRepository;
 
     @Transactional
-    public int saveLikey(int evaluationID, UserJoinRequestDto requestDto){
+    public int saveLikey(int evaluationID, UserRequestDto requestDto){
         Evaluation evaluationIDList = evaluationRepository.findByEvaluationID(evaluationID);
         List<Likey> likeyIDList = likeyRepository.findByEvaluationID(evaluationID);
 

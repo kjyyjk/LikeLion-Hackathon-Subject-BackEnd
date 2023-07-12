@@ -1,17 +1,14 @@
 package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.LikeyService;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.LikeyDto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.ResultDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.searchResultDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +26,7 @@ public class LikeyController {
     }
 
     @PostMapping("/likey/{evaluationID}")
-    public ResponseEntity<ResultDto> likeEvalutionPro(@Valid @RequestBody UserJoinRequestDto requestDto, @PathVariable int evaluationID, BindingResult bindingResult) {
+    public ResponseEntity<ResultDto> likeEvalutionPro(@Valid @RequestBody UserRequestDto requestDto, @PathVariable int evaluationID, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }

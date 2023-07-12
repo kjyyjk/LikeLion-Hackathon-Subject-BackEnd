@@ -3,7 +3,6 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Lec;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.LecService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.LecWriteDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
