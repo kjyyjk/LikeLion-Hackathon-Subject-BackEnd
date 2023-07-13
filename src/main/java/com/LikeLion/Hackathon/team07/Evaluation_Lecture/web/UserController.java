@@ -12,7 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.xml.transform.Result;
+
+@RestController
 
 @Controller
 @RequiredArgsConstructor
