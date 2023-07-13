@@ -3,13 +3,16 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Lec;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.LecService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.LecWriteDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.ResultDto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
@@ -23,15 +26,22 @@ public class LecController {
     }
 
     @PostMapping("/evaluation/write")
-    public ResponseEntity<?> writeLec(@RequestBody LecWriteDto lecWriteDto) {
+    public ResponseEntity<ResultDto> writeLec(@RequestBody LecWriteDto lecWriteDto, BindingResult bindingResult) {
         Lec lec = new Lec();
         lec.setUserID(lecWriteDto.getUserID());
         lec.setLectureName(lecWriteDto.getLectureName());
         lec.setProfessorName(lecWriteDto.getProfessorName());
         lec.setEvaluationContent(lecWriteDto.getEvaluationContent());
+        lec.setEvaluationTitle(lecWriteDto.getEvaluationTitle());
+        lec.setLectureYear(lecWriteDto.getLectureYear());
+        lec.setSemesterDivide(lecWriteDto.getSemesterDivide());
+        lec.setLectureDivide(lecWriteDto.getLectureDivide());
+        lec.setCreditScore(lecWriteDto.getCreditScore());
+        lec.setLectureScore(lecWriteDto.getLectureScore());
 
         lecService.write(lec);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(ResultDto.createResult(200, "글 작성 완료"));
     }
 
     //전체 보여주는 리스트
@@ -62,13 +72,32 @@ public class LecController {
             return new ResponseEntity<>("User information does not match", HttpStatus.UNAUTHORIZED);
         }
 
-        lec.setUserID(LecWriteDto.getUserID());
-        lec.setLectureName(LecWriteDto.getLectureName());
-        lec.setProfessorName(LecWriteDto.getProfessorName());
-        lec.setEvaluationContent(LecWriteDto.getEvaluationContent());
+        // 유지할 기존 내용을 가져와서 업데이트
+        String lectureName = lec.getLectureName();
+        String professorName = lec.getProfessorName();
+        String evaluationContent = lec.getEvaluationContent();
+        String EvaluationTitle = lec.getEvaluationTitle();
+        Integer LectureYear = lec.getLectureYear();
+        String SemesterDivide = lec.getSemesterDivide();
+        String LectureDivide = lec.getLectureDivide();
+        String CreditScore = lec.getCreditScore();
+        String LectureScore = lec.getLectureScore();
+
+        // 수정할때 새로 쓴부분만 바뀌도록 (원래 데이터 유지)
+        lec.setLectureName(LecWriteDto.getLectureName() != null ? LecWriteDto.getLectureName() : lectureName);
+        lec.setProfessorName(LecWriteDto.getProfessorName() != null ? LecWriteDto.getProfessorName() : professorName);
+        lec.setEvaluationContent(LecWriteDto.getEvaluationContent() != null ? LecWriteDto.getEvaluationContent() : evaluationContent);
+        lec.setEvaluationTitle(LecWriteDto.getEvaluationTitle() != null ? LecWriteDto.getEvaluationTitle() : EvaluationTitle);
+        lec.setLectureYear(LecWriteDto.getLectureYear() != null ? LecWriteDto.getLectureYear() : LectureYear);
+        lec.setSemesterDivide(LecWriteDto.getSemesterDivide() != null ? LecWriteDto.getSemesterDivide() : SemesterDivide);
+        lec.setLectureDivide(LecWriteDto.getLectureDivide() != null ? LecWriteDto.getLectureDivide() : LectureDivide);
+        lec.setCreditScore(LecWriteDto.getCreditScore() != null ? LecWriteDto.getCreditScore() : CreditScore);
+        lec.setLectureScore(LecWriteDto.getLectureScore() != null ? LecWriteDto.getLectureScore() : LectureScore);
+
 
         lecService.write(lec);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ResultDto.createResult(200, "글 수정 완료"));
+
     }
 
     //삭제
@@ -96,6 +125,7 @@ public class LecController {
         */
 
         lecService.lecDelete(evaluationID);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ResultDto.createResult(200, "글 삭제 완료"));
+
     }
 }
