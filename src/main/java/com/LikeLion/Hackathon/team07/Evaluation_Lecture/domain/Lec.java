@@ -17,4 +17,13 @@ public class Lec {
     private String lectureName;
     private String professorName;
     private String evaluationContent;
+    private Integer lectureYear;
+    private String semesterDivide;
+    private String lectureDivide;
+    private String evaluationTitle;
+    private String creditScore;
+    private String lectureScore;
+    private String createdAt;
+    private String updatedAt;
+
 }
