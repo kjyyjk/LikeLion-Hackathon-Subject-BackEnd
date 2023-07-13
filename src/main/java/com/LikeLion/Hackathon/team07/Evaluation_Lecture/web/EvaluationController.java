@@ -7,10 +7,12 @@ import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.EvaluationReposit
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.EvaluationService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.EvaluationDto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.ResultDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.searchResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,6 @@ import java.util.List;
 public class EvaluationController {
     @Autowired
     private EvaluationService evaluationService;
-    private EvaluationRepository evaluationRepository;
 
     public EvaluationController(EvaluationService evaluationService){
         this.evaluationService = evaluationService;
@@ -39,21 +40,16 @@ public class EvaluationController {
     }
 
     @GetMapping("/evaluation/search/{page}")
-    public ResponseEntity<ResultDto> searchPro(@PathVariable int page, @RequestParam(value = "search") String search, @RequestParam(value = "searchType") String searchType, @RequestParam(value = "lectureDivide") String lectureDivide){
-        System.out.println(search);
-        List<EvaluationDto> searchList = evaluationService.getSearchList(search);
-        System.out.println(searchList);
+    public ResponseEntity<searchResultDto> searchPro(@PathVariable int page, @RequestParam(value = "search") String search, @RequestParam(value = "searchType") String searchType, @RequestParam(value = "lectureDivide") String lectureDivide, Pageable pageable){
+        if (searchType.isEmpty() || lectureDivide.isEmpty() || pageable == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
 
-        PageRequest pageable = PageRequest.of(page, 10, Sort.by("created_at").descending());
-        System.out.println(pageable);
+        page = (page == 0) ? 0 : (page - 1);
 
-        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "검색 완료"));
+        Page<EvaluationDto> postPageList = evaluationService.getEvaluationList(pageable, page, search, searchType, lectureDivide);
+
+        System.out.println(postPageList);
+        return ResponseEntity.status(HttpStatus.OK).body(searchResultDto.createResult(200, postPageList));
     }
-
-//    @GetMapping("/find-by-name")
-//    public Page<ResultDto> findByName(@RequestParam(required = false, defaultValue = "0") int page) {
-//        PageRequest pageable = PageRequest.of(page, 10, Sort.by("created_at").descending());
-//        return evaluationRepository.findByTitleContains(search, pageable);
-//    }
-
 }

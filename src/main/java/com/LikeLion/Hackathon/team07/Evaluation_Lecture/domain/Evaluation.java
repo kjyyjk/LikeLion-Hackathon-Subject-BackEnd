@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -15,42 +17,50 @@ public class Evaluation {
     private int evaluationID;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
     private String userID;
 
     @Column(nullable = false)
-    private String lecture_name;
+    private String lectureName;
 
     @Column(nullable = false)
-    private String professor_name;
+    private String professorName;
 
     @Column(nullable = false)
-    private int lecture_year;
+    private int lectureYear;
 
     @Column(nullable = false)
-    private String semester_divide;
+    private String semesterDivide;
 
     @Column(nullable = false)
-    private String lecture_divide;
+    private String lectureDivide;
 
     @Column(nullable = false)
-    private String evaluation_title;
+    private String evaluationTitle;
 
     @Column(nullable = false)
-    private String evaluation_content;
+    private String evaluationContent;
+
+    @Column(nullable = false)
+    private int likeCount;
+
+    @Column(nullable = false)
+    private Timestamp createdAt;
+
+    @Column(nullable = false)
+    private Timestamp updatedAt;
 
     @Builder
-    public Evaluation(String title, String userID, String lecture_name, String professor_name, int lecture_year, String semester_divide, String lecture_divide, String evaluation_title, String evaluation_content){
-        this.title = title;
+    public Evaluation(String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt){
         this.userID = userID;
-        this.lecture_name = lecture_name;
-        this.professor_name = professor_name;
-        this.lecture_year = lecture_year;
-        this.semester_divide = semester_divide;
-        this.lecture_divide = lecture_divide;
-        this.evaluation_title = evaluation_title;
-        this.evaluation_content = evaluation_content;
+        this.lectureName = lectureName;
+        this.professorName = professorName;
+        this.lectureYear = lectureYear;
+        this.semesterDivide = semesterDivide;
+        this.lectureDivide = lectureDivide;
+        this.evaluationTitle = evaluationTitle;
+        this.evaluationContent = evaluationContent;
+        this.likeCount = likeCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 }
