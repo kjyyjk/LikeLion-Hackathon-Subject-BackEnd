@@ -44,4 +44,16 @@ public class UserService {
         }
         return false;
     }
+
+    @Transactional
+    public boolean logout(UserRequestDto requestDto) {
+        Optional<User> byUserID = userRepository.findByUserID(requestDto.getUserID());
+        if(byUserID.isPresent()){
+            if(byUserID.get().isLoginStatus()){
+                byUserID.get().userLogout();
+                return true;
+            }
+        }
+        return false;
+    }
 }
