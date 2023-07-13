@@ -3,7 +3,6 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 //import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Search;
 //import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.SearchService;
 //import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.EvaluationDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Evaluation;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.EvaluationRepository;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.EvaluationService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.EvaluationDto;
@@ -13,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,20 +35,21 @@ public class EvaluationController {
     }
 
     @GetMapping("/")
-    public String mainForm(@PathVariable int page){
+    public String mainForm(){
         return "Search";
     }
 
     @GetMapping("/evaluation/search/{page}")
-    public ResponseEntity<searchResultDto> searchPro(@PathVariable int page, @RequestParam(value = "search") String search, @RequestParam(value = "searchType") String searchType, @RequestParam(value = "lectureDivide") String lectureDivide, BindingResult bindingResult){
-        System.out.println(search);
-        List<EvaluationDto> searchList = evaluationService.getSearchList(search);
-
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(searchResultDto.createResult(400, bindingResult));
+    public ResponseEntity<searchResultDto> searchPro(@PathVariable int page, @RequestParam(value = "search") String search, @RequestParam(value = "searchType") String searchType, @RequestParam(value = "lectureDivide") String lectureDivide, Pageable pageable){
+        if (searchType.isEmpty() || lectureDivide.isEmpty() || pageable == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(searchResultDto.createResult(200, searchList));
-    }
+        page = (page == 0) ? 0 : (page - 1);
 
+        Page<EvaluationDto> postPageList = evaluationService.getEvaluationList(pageable, page, search, searchType, lectureDivide);
+
+        System.out.println(postPageList);
+        return ResponseEntity.status(HttpStatus.OK).body(searchResultDto.createResult(200, postPageList));
+    }
 }

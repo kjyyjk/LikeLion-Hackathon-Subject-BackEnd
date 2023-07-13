@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
@@ -17,10 +18,8 @@ public class searchResultDto {
     private int code;
     private Object result;
 
-
-
-    public static searchResultDto createResult(int code, List<EvaluationDto> evaluationResult) {
-        return new searchResultDto(code, evaluationResult);
+    public static searchResultDto createResult(int code, Page<EvaluationDto> evaluationResult) {
+        return new searchResultDto(code, evaluationResult.getContent());
     }
 
     public static searchResultDto createResult(int code, BindingResult bindingResult) {
