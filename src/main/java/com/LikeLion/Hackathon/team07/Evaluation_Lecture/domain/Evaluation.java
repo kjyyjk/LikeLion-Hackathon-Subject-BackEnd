@@ -17,9 +17,6 @@ public class Evaluation {
     private int evaluationID;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
     private String userID;
 
     @Column(nullable = false)
@@ -53,8 +50,7 @@ public class Evaluation {
     private Timestamp updatedAt;
 
     @Builder
-    public Evaluation(String title, String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt){
-        this.title = title;
+    public Evaluation(String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt){
         this.userID = userID;
         this.lectureName = lectureName;
         this.professorName = professorName;

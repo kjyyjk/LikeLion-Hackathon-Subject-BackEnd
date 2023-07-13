@@ -30,12 +30,12 @@ public class LikeyController {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
-        System.out.println(requestDto);
-        System.out.println(evaluationID);
 
-        int result = likeyService.saveLikey(evaluationID, requestDto);
+        if(likeyService.checkUser(requestDto.getUserID()) == 0){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "존재하지 않는 유저입니다."));
+        }
 
-        if(result == 0){
+        if(likeyService.saveLikey(evaluationID, requestDto) == 0){
             System.out.println("추천 취소");
             return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(201, "추천 취소 완료"));
         } else {

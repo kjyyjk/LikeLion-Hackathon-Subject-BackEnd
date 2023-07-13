@@ -11,7 +11,6 @@ import java.sql.Timestamp;
 @ToString
 @NoArgsConstructor
 public class EvaluationDto {
-    private String title;
     private String userID;
     private String lectureName;
     private String professorName;
@@ -25,8 +24,7 @@ public class EvaluationDto {
     private Timestamp updatedAt;
 
     @Builder
-    public EvaluationDto(String title,String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt) {
-        this.title = title;
+    public EvaluationDto(String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt) {
         this.userID = userID;
         this.lectureName = lectureName;
         this.professorName = professorName;
@@ -42,7 +40,6 @@ public class EvaluationDto {
 
     public Evaluation toEntity(){
         return Evaluation.builder()
-                .title(title)
                 .userID(userID)
                 .lectureName(lectureName)
                 .professorName(professorName)
