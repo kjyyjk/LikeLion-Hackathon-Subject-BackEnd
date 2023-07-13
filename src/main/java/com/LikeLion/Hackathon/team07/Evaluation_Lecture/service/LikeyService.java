@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -18,10 +19,12 @@ public class LikeyService {
 
     @Transactional
     public int checkUser(String userID){
-        User user = userRepository.findByUserID(userID);
+        Optional<User> user = userRepository.findByUserID(userID);
 
+        System.out.print("user: ");
+        System.out.println(user);
         // 유저가 존재하지 않는 경우
-        if(user == null){
+        if(user.isPresent()){
             return 1;
         } else{
             return 0;

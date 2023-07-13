@@ -31,7 +31,7 @@ public class LikeyController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
 
-        if(likeyService.checkUser(requestDto.getUserID()) == 1){
+        if(likeyService.checkUser(requestDto.getUserID()) == 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "존재하지 않는 유저입니다."));
         }
 
