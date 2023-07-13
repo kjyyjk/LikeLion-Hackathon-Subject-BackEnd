@@ -15,7 +15,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public int join(UserJoinRequestDto requestDto){
-        return userRepository.save(requestDto.toEntity()).getIndex();
+        return userRepository.save(requestDto.toEntity()).getUserIndex();
     }
 
     public boolean checkDuplication(UserJoinRequestDto requestDto) {

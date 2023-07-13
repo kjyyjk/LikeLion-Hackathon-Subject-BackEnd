@@ -28,16 +28,16 @@ public class UserJoinRequestDto {
 
     @Builder
     public UserJoinRequestDto(String userID, String userPassword, String userEmail) {
-        this.user_id = user_id;
-        this.user_password = user_password;
-        this.user_email = user_email;
+        this.userID = userID;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
     }
 
     public User toEntity(){
         return User.builder()
-                .userID(user_id)
-                .userPassword(user_password)
-                .userEmail(user_email)
+                .userID(userID)
+                .userPassword(userPassword)
+                .userEmail(userEmail)
                 .build();
     }
 }

@@ -1,9 +1,6 @@
 package com.LikeLion.Hackathon.team07.Evaluation_Lecture.service;
 
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Evaluation;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.EvaluationRepository;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Likey;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.LikeyRepository;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.*;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.LikeyDto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +14,19 @@ import java.util.List;
 public class LikeyService {
     private final LikeyRepository likeyRepository;
     private final EvaluationRepository evaluationRepository;
+    private final UserRepository userRepository;
+
+    @Transactional
+    public int checkUser(String userID){
+        User user = userRepository.findByUserID(userID);
+
+        // 유저가 존재하지 않는 경우
+        if(user == null){
+            return 1;
+        } else{
+            return 0;
+        }
+    }
 
     @Transactional
     public int saveLikey(int evaluationID, UserJoinRequestDto requestDto){
