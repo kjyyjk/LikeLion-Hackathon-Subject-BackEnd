@@ -34,4 +34,8 @@ public class LecWriteDto {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
+
 }
+
+}
+

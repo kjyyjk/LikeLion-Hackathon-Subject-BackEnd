@@ -25,4 +25,5 @@ public class Lec {
     private String lectureScore;
     private String createdAt;
     private String updatedAt;
+
 }
