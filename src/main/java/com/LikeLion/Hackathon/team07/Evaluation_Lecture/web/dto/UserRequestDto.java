@@ -1,7 +1,6 @@
 package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto;
 
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.User;
-import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +9,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
-@Getter //@Getter이 있어야 db에 null값이 아닌 값이 들어간다
+@Getter
 
-public class UserJoinRequestDto {
-
-    private String user_id;
-    private String user_password;
-    private String user_email;
-
+public class UserRequestDto {
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String userID;
     @NotBlank(message = "비밀번호는 필수 입력 값입니다.")
@@ -27,17 +21,17 @@ public class UserJoinRequestDto {
     private String userEmail;
 
     @Builder
-    public UserJoinRequestDto(String userID, String userPassword, String userEmail) {
-        this.user_id = user_id;
-        this.user_password = user_password;
-        this.user_email = user_email;
+    public UserRequestDto(String userID, String userPassword, String userEmail) {
+        this.userID = userID;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
     }
 
     public User toEntity(){
         return User.builder()
-                .userID(user_id)
-                .userPassword(user_password)
-                .userEmail(user_email)
+                .userID(userID)
+                .userPassword(userPassword)
+                .userEmail(userEmail)
                 .build();
     }
 }
