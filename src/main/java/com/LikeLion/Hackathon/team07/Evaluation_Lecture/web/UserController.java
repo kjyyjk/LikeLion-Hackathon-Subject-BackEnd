@@ -3,6 +3,7 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.UserService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.ResultDto;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserRequestDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public ResponseEntity<ResultDto> userJoinPro(@Valid @RequestBody UserRequestDto requestDto, BindingResult bindingResult) {
+    public ResponseEntity<ResultDto> userJoinPro(@Valid @RequestBody UserJoinRequestDto requestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
@@ -41,18 +42,35 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResultDto> userLoginPro(@Valid @RequestBody UserRequestDto requestDto){
-        if(!userService.login(requestDto)){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "로그인 실패"));
+    public ResponseEntity<ResultDto> userLoginPro(@Valid @RequestBody UserRequestDto requestDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그인 성공"));
+        if(userService.login(requestDto)){
+            return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그인 성공"));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "로그인 실패"));
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<ResultDto> userLogoutPro(@Valid @RequestBody UserRequestDto requestDto){
-        if(!userService.logout(requestDto)){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "로그아웃 실패"));
+    public ResponseEntity<ResultDto> userLogoutPro(@Valid @RequestBody UserRequestDto requestDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그아웃 성공"));
+        if(userService.logout(requestDto)){
+            return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "로그아웃 성공"));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "로그아웃 실패"));
+    }
+
+    @PostMapping("/deleteuser")
+    public ResponseEntity<ResultDto> userWithDrawPro(@Valid @RequestBody UserRequestDto requestDto, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
+        }
+        if (userService.withDraw(requestDto)) {
+            return ResponseEntity.status(HttpStatus.OK).body(ResultDto.createResult(200, "회원탈퇴 성공"));
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, "회원탈퇴 실패"));
     }
 }
