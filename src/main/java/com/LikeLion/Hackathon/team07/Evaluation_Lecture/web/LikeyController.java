@@ -2,7 +2,7 @@ package com.LikeLion.Hackathon.team07.Evaluation_Lecture.web;
 
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.service.LikeyService;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.ResultDto;
-import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserRequestDto;
+import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.UserJoinRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class LikeyController {
     }
 
     @PostMapping("/likey/{evaluationID}")
-    public ResponseEntity<ResultDto> likeEvalutionPro(@Valid @RequestBody UserRequestDto requestDto, @PathVariable int evaluationID, BindingResult bindingResult) {
+    public ResponseEntity<ResultDto> likeEvalutionPro(@Valid @RequestBody UserJoinRequestDto requestDto, @PathVariable int evaluationID, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ResultDto.createResult(400, bindingResult));
         }
