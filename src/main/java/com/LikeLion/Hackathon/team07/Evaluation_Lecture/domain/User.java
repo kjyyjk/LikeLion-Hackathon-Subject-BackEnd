@@ -4,30 +4,43 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @Getter
+@DynamicUpdate
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int index;
+    private int userIndex;
 
     @Column
-    private String user_id;
+    private String userID;
 
     @Column
-    private String user_password;
+    private String userPassword;
 
     @Column
-    private String user_email;
+    private String userEmail;
 
+    @Column
+    private boolean loginStatus;
+
+    public void userLogin(){
+        this.loginStatus = true;
+    }
+    public void userLogout() {
+        this.loginStatus = false;
+    }
     @Builder
-    public User(String userID, String userPassword, String userEmail){
-        this.user_id = user_id;
-        this.user_password = user_password;
-        this.user_email = user_email;
+    public User(String userID, String userPassword, String userEmail) {
+        this.userID = userID;
+        this.userPassword = userPassword;
+        this.userEmail = userEmail;
+        this.loginStatus = false;
     }
 }
