@@ -38,7 +38,7 @@ public class UserService {
     public boolean login(UserRequestDto requestDto) {
         Optional<User> byUserID = userRepository.findByUserID(requestDto.getUserID());
         if (byUserID.isPresent()) {
-            if(byUserID.get().getUserPassword().equals(requestDto.getUserPassword())){
+            if(!byUserID.get().isLoginStatus() && byUserID.get().getUserPassword().equals(requestDto.getUserPassword())){
                 byUserID.get().userLogin();
                 return true;
             }
@@ -50,7 +50,7 @@ public class UserService {
     public boolean logout(UserRequestDto requestDto) {
         Optional<User> byUserID = userRepository.findByUserID(requestDto.getUserID());
         if(byUserID.isPresent()){
-            if(byUserID.get().isLoginStatus()){
+            if(byUserID.get().isLoginStatus() && byUserID.get().getUserPassword().equals(requestDto.getUserPassword())){
                 byUserID.get().userLogout();
                 return true;
             }
