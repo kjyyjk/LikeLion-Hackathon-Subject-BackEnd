@@ -14,7 +14,7 @@ import java.util.Date;
 public class Evaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int evaluationID;
+    private Integer evaluationID;
 
     @Column(nullable = false)
     private String userID;
@@ -26,7 +26,7 @@ public class Evaluation {
     private String professorName;
 
     @Column(nullable = false)
-    private int lectureYear;
+    private Integer lectureYear;
 
     @Column(nullable = false)
     private String semesterDivide;
@@ -41,6 +41,12 @@ public class Evaluation {
     private String evaluationContent;
 
     @Column(nullable = false)
+    private String creditScore;
+
+    @Column(nullable = false)
+    private String lectureScore;
+
+    @Column(nullable = false)
     private int likeCount;
 
     @Column(nullable = false)
@@ -50,7 +56,7 @@ public class Evaluation {
     private Timestamp updatedAt;
 
     @Builder
-    public Evaluation(String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt){
+    public Evaluation(String userID, String lectureName, String professorName, Integer lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, String creditScore, String lectureScore, int likeCount, Timestamp createdAt, Timestamp updatedAt){
         this.userID = userID;
         this.lectureName = lectureName;
         this.professorName = professorName;
@@ -59,6 +65,8 @@ public class Evaluation {
         this.lectureDivide = lectureDivide;
         this.evaluationTitle = evaluationTitle;
         this.evaluationContent = evaluationContent;
+        this.creditScore = creditScore;
+        this.lectureScore = lectureScore;
         this.likeCount = likeCount;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

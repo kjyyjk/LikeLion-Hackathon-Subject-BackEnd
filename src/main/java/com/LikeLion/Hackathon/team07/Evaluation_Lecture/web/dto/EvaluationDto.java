@@ -14,17 +14,19 @@ public class EvaluationDto {
     private String userID;
     private String lectureName;
     private String professorName;
-    private int lectureYear;
+    private Integer lectureYear;
     private String semesterDivide;
     private String lectureDivide;
     private String evaluationTitle;
     private String evaluationContent;
+    private String creditScore;
+    private String lectureScore;
     private int likeCount;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
     @Builder
-    public EvaluationDto(String userID, String lectureName, String professorName, int lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, int likeCount, Timestamp createdAt, Timestamp updatedAt) {
+    public EvaluationDto(String userID, String lectureName, String professorName, Integer lectureYear, String semesterDivide, String lectureDivide, String evaluationTitle, String evaluationContent, String creditScore, String lectureScore, int likeCount, Timestamp createdAt, Timestamp updatedAt) {
         this.userID = userID;
         this.lectureName = lectureName;
         this.professorName = professorName;
@@ -33,6 +35,8 @@ public class EvaluationDto {
         this.lectureDivide = lectureDivide;
         this.evaluationTitle = evaluationTitle;
         this.evaluationContent = evaluationContent;
+        this.creditScore = creditScore;
+        this.lectureScore = lectureScore;
         this.likeCount = likeCount;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -48,6 +52,8 @@ public class EvaluationDto {
                 .lectureDivide(lectureDivide)
                 .evaluationTitle(evaluationTitle)
                 .evaluationContent(evaluationContent)
+                .creditScore(creditScore)
+                .lectureScore(lectureScore)
                 .likeCount(likeCount)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
