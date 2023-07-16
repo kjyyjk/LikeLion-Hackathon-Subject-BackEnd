@@ -4,6 +4,7 @@ import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.Evaluation;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.domain.EvaluationRepository;
 import com.LikeLion.Hackathon.team07.Evaluation_Lecture.web.dto.EvaluationDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -49,6 +50,8 @@ public class EvaluationService {
                         evaluation.getLectureDivide(),
                         evaluation.getEvaluationTitle(),
                         evaluation.getEvaluationContent(),
+                        evaluation.getCreditScore(),
+                        evaluation.getLectureScore(),
                         evaluation.getLikeCount(),
                         evaluation.getCreatedAt(),
                         evaluation.getUpdatedAt()
@@ -56,6 +59,28 @@ public class EvaluationService {
         );
 
         return postPageList;
+    }
+
+    //평가글 작성
+    public void write(Evaluation evaluation){
+        evaluationRepository.save(evaluation);
+    }
+
+
+    //평가글 리스트
+    public List<Evaluation> lecList(){
+        return evaluationRepository.findAll();
+    }
+
+    //평가글 불러오기
+    public Evaluation lecView(Integer evaluationID){
+        return evaluationRepository.findById(evaluationID).get();
+    }
+
+
+    //평가글 삭제
+    public void lecDelete(Integer evaluationID){
+        evaluationRepository.deleteById(evaluationID);
     }
 
     private EvaluationDto convertEntityToDto(Evaluation ch) {
