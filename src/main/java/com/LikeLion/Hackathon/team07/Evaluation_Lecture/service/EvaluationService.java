@@ -91,7 +91,13 @@ public class EvaluationService {
                 .lectureYear(ch.getLectureYear())
                 .semesterDivide(ch.getSemesterDivide())
                 .lectureDivide(ch.getLectureDivide())
+                .evaluationTitle(ch.getEvaluationTitle())
                 .evaluationContent(ch.getEvaluationContent())
+                .creditScore(ch.getCreditScore())
+                .lectureScore(ch.getLectureScore())
+                .likeCount(ch.getLikeCount())
+                .createdAt(ch.getCreatedAt())
+                .updatedAt(ch.getUpdatedAt())
                 .build();
     }
 }

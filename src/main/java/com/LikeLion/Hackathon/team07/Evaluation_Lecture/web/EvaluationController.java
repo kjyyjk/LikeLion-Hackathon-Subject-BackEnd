@@ -76,6 +76,9 @@ public class EvaluationController {
         evaluation.setLectureDivide(evaluationDto.getLectureDivide());
         evaluation.setCreditScore(evaluationDto.getCreditScore());
         evaluation.setLectureScore(evaluationDto.getLectureScore());
+        evaluation.setLikeCount(evaluationDto.getLikeCount());
+        evaluation.setCreatedAt(evaluationDto.getCreatedAt());
+        evaluation.setUpdatedAt(evaluationDto.getUpdatedAt());
 
         evaluationService.write(evaluation);
 
