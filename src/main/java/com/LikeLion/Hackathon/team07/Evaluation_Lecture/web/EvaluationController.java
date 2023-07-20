@@ -55,10 +55,9 @@ public class EvaluationController {
     }
 
     @PostMapping("/evaluation/write")
-    public ResponseEntity<ResultDto> writeLec(@RequestBody EvaluationDto evaluationDto) {
-        Evaluation evaluation = new Evaluation();
-        System.out.println(evaluationDto.getUserID());
-        Optional<User> user = userRepository.findByUserID(evaluationDto.getUserID());
+    public ResponseEntity<ResultDto> writeLec(@RequestBody Evaluation requestDto) {
+        System.out.println(requestDto.getUserID());
+        Optional<User> user = userRepository.findByUserID(requestDto.getUserID());
 
         if (user.isPresent()) {
             if (!(user.get().isLoginStatus())) {
@@ -66,21 +65,7 @@ public class EvaluationController {
             }
         }
 
-        evaluation.setUserID(evaluationDto.getUserID());
-        evaluation.setLectureName(evaluationDto.getLectureName());
-        evaluation.setProfessorName(evaluationDto.getProfessorName());
-        evaluation.setEvaluationContent(evaluationDto.getEvaluationContent());
-        evaluation.setEvaluationTitle(evaluationDto.getEvaluationTitle());
-        evaluation.setLectureYear(evaluationDto.getLectureYear());
-        evaluation.setSemesterDivide(evaluationDto.getSemesterDivide());
-        evaluation.setLectureDivide(evaluationDto.getLectureDivide());
-        evaluation.setCreditScore(evaluationDto.getCreditScore());
-        evaluation.setLectureScore(evaluationDto.getLectureScore());
-        evaluation.setLikeCount(evaluationDto.getLikeCount());
-        evaluation.setCreatedAt(evaluationDto.getCreatedAt());
-        evaluation.setUpdatedAt(evaluationDto.getUpdatedAt());
-
-        evaluationService.write(evaluation);
+        evaluationService.write(requestDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ResultDto.createResult(200, "글 작성 완료"));
     }
